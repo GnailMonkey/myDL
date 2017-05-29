@@ -47,7 +47,7 @@ def dataproprecessing():
         name_vec.append(word_vec)
     return name_vec, gender, vocab_size, vocab
 
-# http://blog.csdn.net/u013713117/article/details/55049808
+# 参考博客 http://blog.csdn.net/u013713117/article/details/55049808
 def neural_network(vocab_size, embedding_size=128, num_filters=128):
     # 将单词索引映射到低维的向量表示
     with tf.name_scope("embedding"):
