@@ -85,6 +85,7 @@ def neural_network(vocab_size, embedding_size=128, num_filters=128):
         output = tf.nn.xw_plus_b(h_drop, W, b)
     return output
 
+# 模型训练
 def train_neural_network(train_x, train_y):
     output = neural_network(vocab_size)
     num_batch = len(train_x) // batch_size
