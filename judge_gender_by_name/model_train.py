@@ -117,8 +117,9 @@ def evaluation(test_x, test_y):
             saver.restore(sess, ckpt.model_checkpoint_path)
         else:
             print("没找到模型")
-
+        total_rate = 0
         test_batch = len(test_x) // batch_size
+        count = 0
         for i in range(test_batch):
             batch_x = test_x[i * batch_size: (i + 1) * batch_size]
             batch_y = test_y[i * batch_size: (i + 1) * batch_size]
@@ -126,7 +127,12 @@ def evaluation(test_x, test_y):
             correct_prediction = tf.equal(tf.arg_max(prediction, 1), tf.arg_max(Y, 1))
             accuracy = tf.reduce_mean(tf.cast(correct_prediction, "float"))
             if i % 50 == 0:
-                print(sess.run(accuracy, feed_dict={X: batch_x, Y: batch_y, dropout_keep_prob: 1.0}))
+                accuracy_rate = sess.run(accuracy, feed_dict={X: batch_x, Y: batch_y, dropout_keep_prob: 1.0})
+                print(accuracy_rate)
+                total_rate += accuracy_rate
+                count += 1
+        # 92%
+        print("the average accuracy is: ", total_rate/count)
 
 # 根据姓名预测性别
 def detect_gender(name_list):
