@@ -9,7 +9,7 @@ from sklearn.cross_validation import train_test_split
 max_name_length = 8
 
 def dataproprecessing():
-    name_dataset = r'.\person_1324473.txt'
+    name_dataset = r'.\person.txt'
     name = []
     gender = []
     name_vec = []
@@ -104,7 +104,7 @@ def train_neural_network(train_x, train_y):
                 print(e, i, loss_)
             # 保存模型
             if e % 50 == 0:
-                saver.save(sess, r'.\train_model\name2sex.model', global_step=e)
+                saver.save(sess, r'.\train_model\name2gender.model', global_step=e)
 
 # 计算准确率
 def evaluation(test_x, test_y):
