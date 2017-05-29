@@ -61,7 +61,7 @@ class PersonName(object):
                     f.write(girl + ',女')
                     f.write('\n')
 
-    # 开启多进程
+    # 开启多进程，提高速度
     def multi_process(self):
         pool = Pool()
         # for surname in self.get_all_surname():
