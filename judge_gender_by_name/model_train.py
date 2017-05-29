@@ -9,7 +9,7 @@ from sklearn.cross_validation import train_test_split
 max_name_length = 8
 
 def dataproprecessing():
-    name_dataset = r'E:\DataSets\person_1324473.txt'
+    name_dataset = r'.\person_1324473.txt'
     name = []
     gender = []
     name_vec = []
