@@ -49,7 +49,7 @@ class PersonName(object):
     def get_person_name(self, surname):
         boy_url = surname[:-14] + 'name/boys.html'
         girl_url = surname[:-14] + 'name/girls.html'
-        with open(r'E:\DataSets\person.txt', 'a', encoding='utf-8') as f:
+        with open(r'.\person.txt', 'a', encoding='utf-8') as f:
             for b_page in self.get_final_url(boy_url):
                 boys = self.get_all_name(b_page)
                 for boy in boys:
