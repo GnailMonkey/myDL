@@ -9,7 +9,7 @@ import torch
 import torch.nn.functional as F
 
 """
-skip-grim, x为当前词ont-hot，y为当前词前后window个词的one-hot 
+skip-gram, x为当前词ont-hot，y为当前词前后window个词的one-hot 
 train data: 381*91, 91个不同词
         w1: 91*10
         w2: 10*91
