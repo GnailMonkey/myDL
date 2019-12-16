@@ -8,6 +8,14 @@ import jieba as jb
 import torch
 import torch.nn.functional as F
 
+"""
+skip-grim, x为当前词ont-hot，y为当前词前后window个词的one-hot 
+train data: 381*91, 91个不同词
+        w1: 91*10
+        w2: 10*91
+   输出的w1: 91*10，即代表91个x词所对应的10维向量         
+"""
+
 
 def to_one_hot(data_point_index, vocab_size):
     """
@@ -50,7 +58,7 @@ def gen_data(string, window_size=2):
 
 
 def train_embedding(x_train, y_train, vocab_size, embedding_dim=5, num_iterations=10000, learning_rate=0.1):
-    print(f'Train data shape: {x_train.shape}')
+    print(f'Train data shape: {x_train.shape}, label y: {y_train.shape}')
     w1 = torch.randn(vocab_size, embedding_dim, dtype=float, requires_grad=True)
     b1 = torch.randn(embedding_dim, dtype=float, requires_grad=True)
     x_train = torch.from_numpy(x_train)
@@ -76,7 +84,9 @@ def train_embedding(x_train, y_train, vocab_size, embedding_dim=5, num_iteration
             w2.grad.data.zero_()
             b1.grad.data.zero_()
             b2.grad.data.zero_()
-    return (w1+b1).detach().numpy()
+    vectors = (w1+b1).detach().numpy()
+    print(f'vector shape:{vectors.shape}')
+    return vectors
 
 
 def calc_euclidean_distance(vec1, vec2):
@@ -102,6 +112,6 @@ if __name__ == "__main__":
     train_x, train_y, words_len, w2i, i2w = gen_data(documents, window_size=2)
     vector = train_embedding(train_x, train_y, words_len, embedding_dim=10)
     search_word = '神经网络'
-    topk_closest = search_closest(w2i[search_word], vector,  i2w, topk=10)
+    topk_closest = search_closest(w2i[search_word], vector, i2w, topk=10)
     for i in topk_closest:
         print(f'与{search_word}接近的词有：{i[0]}, 距离为：{i[1]}')
